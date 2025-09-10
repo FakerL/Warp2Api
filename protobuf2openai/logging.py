@@ -4,10 +4,11 @@
 Local logging for protobuf2openai package to avoid cross-package dependencies.
 """
 import logging
+import os
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
-LOG_DIR = Path("logs")
+LOG_DIR = Path(os.getenv("LOG_DIR", "logs"))
 LOG_DIR.mkdir(exist_ok=True)
 
 _logger = logging.getLogger("protobuf2openai")
@@ -29,4 +30,4 @@ console_handler.setFormatter(fmt)
 _logger.addHandler(file_handler)
 _logger.addHandler(console_handler)
 
-logger = _logger 
+logger = _logger
